@@ -124,6 +124,7 @@ class _NavDrawerState extends State<NavDrawer> {
             builder: (context) =>
                 Selector('Регион', widget.api.getOkatoList(), okatoFormatter)));
     if (_defaultOkato == null) return;
+    if (_defaultOkato.id == currentOkato.id) return;
     widget.settings.setOkato(_defaultOkato);
     currentOkato = _defaultOkato;
     Navigator.of(context).pushReplacementNamed('/timetable');
