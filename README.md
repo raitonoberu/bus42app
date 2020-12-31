@@ -12,8 +12,7 @@
 - Малый размер и высокая скорость работы
 
 ## Скачать
-Пользователь Android могут скачать `.apk` файл со [страницы релизов](https://github.com/raitonoberu/bus42app/releases/latest).
-
+Пользователи Android могут скачать `.apk` файл со [страницы релизов](https://github.com/raitonoberu/bus42app/releases/latest).
 
 ## Скриншоты
 
