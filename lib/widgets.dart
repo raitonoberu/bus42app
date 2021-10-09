@@ -37,10 +37,8 @@ Widget chip(String text, Color color, [bool margin = true]) {
 
 class NavDrawer extends StatefulWidget {
   // <a href='https://www.freepik.com/vectors/background'>Background vector created by rawpixel.com - www.freepik.com</a>
-  final Bus42Api api;
-  final SettingsController settings;
 
-  NavDrawer(this.api, this.settings);
+  NavDrawer();
 
   @override
   _NavDrawerState createState() => _NavDrawerState();
@@ -122,17 +120,17 @@ class _NavDrawerState extends State<NavDrawer> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                Selector('Регион', widget.api.getOkatoList(), okatoFormatter)));
+                Selector('Регион', api.getOkatoList(), okatoFormatter)));
     if (_defaultOkato == null) return;
     if (_defaultOkato.id == currentOkato.id) return;
-    widget.settings.setOkato(_defaultOkato);
+    settings.setOkato(_defaultOkato);
     currentOkato = _defaultOkato;
     Navigator.of(context).pushReplacementNamed('/timetable');
   }
 
   @override
   void initState() {
-    currentOkato = widget.settings.getOkato();
+    currentOkato = settings.getOkato();
     super.initState();
   }
 }

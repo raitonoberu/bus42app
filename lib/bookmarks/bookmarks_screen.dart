@@ -3,33 +3,28 @@ import 'package:flutter/material.dart';
 import '../api/api.dart';
 import '../api/models.dart';
 import '../formatters.dart';
-import '../settings/settings.dart';
 import '../timetable/timetable_visualizer.dart';
 import '../widgets.dart';
 import 'bookmarks.dart';
 
 class BookmarksScreen extends StatefulWidget {
-  final Bus42Api api;
-  final SettingsController settings;
   final NavDrawer drawer;
 
-  BookmarksScreen(this.api, this.settings, this.drawer);
+  BookmarksScreen(this.drawer);
 
   @override
   _BookmarksScreenState createState() => _BookmarksScreenState();
 }
 
 class _BookmarksScreenState extends State<BookmarksScreen> {
-  Bus42Api api;
-  SettingsController settings;
   List<TimetableInfo> items = [];
 
   Future showTimetable(BuildContext context, TimetableInfo item) async {
     await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => TimetableVisualizer(
-              api: api, settings: settings, data: item, isStarred: true),
+          builder: (context) =>
+              TimetableVisualizer(data: item, isStarred: true),
         ));
     refresh();
   }
@@ -74,8 +69,6 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
 
   @override
   void initState() {
-    api = widget.api;
-    settings = widget.settings;
     initialize();
     super.initState();
   }

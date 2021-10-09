@@ -9,22 +9,17 @@ import 'utils.dart';
 import 'widgets.dart';
 
 class TimetableVisualizer extends StatefulWidget {
-  final Bus42Api api;
-  final SettingsController settings;
   final models.TimetableInfo data;
   final bool isStarred;
 
-  TimetableVisualizer({this.api, this.settings, this.data, this.isStarred = false});
+  TimetableVisualizer({this.data, this.isStarred = false});
 
   @override
   _TimetableVisualizerState createState() => _TimetableVisualizerState();
 }
 
 class _TimetableVisualizerState extends State<TimetableVisualizer> {
-  Bus42Api api;
-
   models.Timetable timetable;
-  SettingsController settings;
   bool isInitialized = false;
   bool isStarred;
   bool notFound = false;
@@ -170,8 +165,6 @@ class _TimetableVisualizerState extends State<TimetableVisualizer> {
 
   @override
   void initState() {
-    api = widget.api;
-    settings = widget.settings;
     isStarred = widget.isStarred;
     if (widget.data.date == null) widget.data.date = DateTime.now();
     refreshController = RefreshController(initialRefresh: true);

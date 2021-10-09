@@ -6,8 +6,10 @@ import 'package:http/http.dart' as http;
 
 import 'models.dart';
 
+Bus42Api api = Bus42Api();
+
 class Bus42Api {
-  final String url = 'https://bus42.info/navi/api/rpc.php';
+  final Uri url = Uri.parse('https://bus42.info/navi/api/rpc.php');
   final Map headers = <String, String>{
     'accept': 'application/json, text/plain, */*',
     'accept-encoding': 'gzip, deflate, br',

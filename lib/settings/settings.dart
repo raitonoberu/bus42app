@@ -2,13 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api/models.dart';
 
+Settings settings = Settings();
+
 final defaultGridMode = true;
 final defaultOkato = Okato.all();
 final defaultSaveDate = 0;
 final defaultInitialScreen = 0;
 final defaultTimeRemaining = true;
 
-class SettingsController {
+class Settings {
   SharedPreferences prefs;
   bool isInitialized = false;
 

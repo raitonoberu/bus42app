@@ -12,20 +12,15 @@ DateTime date;
 List<models.TransType> transTypeTree = [];
 
 class TimetableScreen extends StatefulWidget {
-  final Bus42Api api;
-  final SettingsController settings;
   final NavDrawer drawer;
 
-  TimetableScreen(this.api, this.settings, this.drawer);
+  TimetableScreen(this.drawer);
 
   @override
   _TimetableScreenState createState() => _TimetableScreenState();
 }
 
 class _TimetableScreenState extends State<TimetableScreen> {
-  Bus42Api api;
-  SettingsController settings;
-
   Future selectDate(context) async {
     var picked = await showDatePicker(
         context: context,
@@ -43,12 +38,8 @@ class _TimetableScreenState extends State<TimetableScreen> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => StopSelector(
-                api: api,
-                settings: settings,
-                date: date,
-                route: route,
-                transType: transType)));
+            builder: (context) =>
+                StopSelector(date: date, route: route, transType: transType)));
   }
 
   @override
@@ -130,8 +121,6 @@ class _TimetableScreenState extends State<TimetableScreen> {
 
   @override
   void initState() {
-    api = widget.api;
-    settings = widget.settings;
     initialize();
     date = DateTime.now();
     super.initState();

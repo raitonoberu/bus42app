@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
-
-import '../api/api.dart';
 import '../widgets.dart';
 import 'settings.dart';
 
 class SettingsScreen extends StatefulWidget {
-  final Bus42Api api;
-  final SettingsController settings;
   final NavDrawer drawer;
 
-  SettingsScreen(this.api, this.settings, this.drawer);
+  SettingsScreen(this.drawer);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  SettingsController settings = SettingsController();
-
   String initialScreenString;
   String gridModeString;
   String timeRemainingString;
@@ -267,7 +261,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   void initState() {
-    settings = widget.settings;
     fillValues();
     super.initState();
   }

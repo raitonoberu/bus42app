@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'api/api.dart';
 import 'bookmarks/bookmarks_screen.dart';
 import 'settings/settings.dart';
 import 'settings/settings_screen.dart';
@@ -13,17 +12,14 @@ import 'widgets.dart' show NavDrawer;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final api = Bus42Api();
-  final settings = SettingsController();
   await settings.initialize();
-  runApp(Bus42Info(api, settings));
+  runApp(Bus42Info());
 }
 
 class Bus42Info extends StatelessWidget {
-  final Bus42Api api;
-  final SettingsController settings;
+  NavDrawer drawer = NavDrawer();
 
-  Bus42Info(this.api, this.settings);
+  Bus42Info();
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +44,6 @@ class Bus42Info extends StatelessWidget {
         }
     }
 
-    // drawer
-    var drawer = NavDrawer(api, settings);
-
     return MaterialApp(
       title: 'Bus42.info',
       theme: ThemeData(
@@ -63,9 +56,9 @@ class Bus42Info extends StatelessWidget {
       ),
       initialRoute: initialRoute,
       routes: {
-        '/timetable': (context) => TimetableScreen(api, settings, drawer),
-        '/bookmarks': (context) => BookmarksScreen(api, settings, drawer),
-        '/settings': (context) => SettingsScreen(api, settings, drawer),
+        '/timetable': (context) => TimetableScreen(drawer),
+        '/bookmarks': (context) => BookmarksScreen(drawer),
+        '/settings': (context) => SettingsScreen(drawer),
       },
       localizationsDelegates: [GlobalMaterialLocalizations.delegate],
       supportedLocales: [const Locale('ru')],

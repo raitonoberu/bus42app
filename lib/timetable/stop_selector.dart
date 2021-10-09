@@ -4,20 +4,16 @@ import 'package:sticky_and_expandable_list/sticky_and_expandable_list.dart';
 import '../api/api.dart';
 import '../api/models.dart' as models;
 import '../formatters.dart';
-import '../settings/settings.dart';
 import '../widgets.dart';
 import 'timetable_visualizer.dart';
 import 'utils.dart';
 
 class StopSelector extends StatefulWidget {
-  final Bus42Api api;
-  final SettingsController settings;
   final DateTime date;
   final models.TransType transType;
   final models.Route route;
 
-  StopSelector(
-      {this.api, this.settings, this.date, this.transType, this.route});
+  StopSelector({this.date, this.transType, this.route});
 
   @override
   _StopSelectorState createState() => _StopSelectorState();
@@ -77,7 +73,6 @@ class _StopSelectorState extends State<StopSelector> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => TimetableVisualizer(
-                                api: widget.api,
                                 data: models.TimetableInfo.fromItems(
                                   transType: widget.transType,
                                   route: widget.route,
@@ -85,7 +80,6 @@ class _StopSelectorState extends State<StopSelector> {
                                   race: sectionList[sectionIndex].race,
                                   stop: item,
                                 ),
-                                settings: widget.settings,
                               )));
                 },
               );
@@ -107,7 +101,7 @@ class _StopSelectorState extends State<StopSelector> {
   }
 
   Future initialize() async {
-    races = await widget.api.getRaceTree(widget.route, widget.date);
+    races = await api.getRaceTree(widget.route, widget.date);
     sectionList = _getSections();
     isLoaded = true;
     if (mounted) setState(() {});
